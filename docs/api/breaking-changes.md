@@ -8,6 +8,19 @@ The `FIXME` string is used in code comments to denote things that should be fixe
 
 # Planned Breaking API Changes (6.0)
 
+## `contentTracing.getTraceBufferUsage()`
+
+```js
+// Deprecated
+contentTracing.getTraceBufferUsage((percentage, value) => {
+  // do something
+})
+// Replace with
+contentTracing.getTraceBufferUsage().then(infoObject => {
+  // infoObject has percentage and value fields
+})
+```
+
 ## `electron.screen` in renderer process
 
 ```js
