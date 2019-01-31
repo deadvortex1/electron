@@ -81,8 +81,11 @@ test_script:
       if ((-Not (Test-Path Env:\ELECTRON_RELEASE)) -And ($env:GN_CONFIG -in "testing", "release")) {
         $env:RUN_TESTS="true"
       }
+  - echo "About to verify ffmpeg"
   - if "%RUN_TESTS%"=="true" ( echo Verifying non proprietary ffmpeg & python electron\script\verify-ffmpeg.py --build-dir out\Default --source-root %cd% --ffmpeg-path out\ffmpeg )
+  - echo "Done verifying ffmpeg"
   - if "%RUN_TESTS%"=="true" ( echo Verifying mksnapshot & python electron\script\verify-mksnapshot.py --build-dir out\Default --source-root %cd% )
+  - echo "Done verifying mksnapshot"
   - ps: >-
       if ($env:RUN_TESTS -eq 'true') {
         New-Item .\out\Default\gen\node_headers\Release -Type directory
